@@ -11,7 +11,6 @@ app.use(morgan("dev"));
 app.use(express.json()); //parse json body
 app.use(express.urlencoded({ extended: true })); //parse urlencoded body
 app.get("/", (req, res, next) => {
-  console.log("GET /");
   // next(new Error("Something went wrong")); //test error handling asychronously
   res.status(200).json({ message: "hello" }).end();
 });
