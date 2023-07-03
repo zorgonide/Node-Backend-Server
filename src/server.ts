@@ -20,7 +20,10 @@ app.post("/signin", signIn);
 app.post("/user", createUser);
 
 app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({ message: "Something went wrong" + err.message });
+  if (err.type === "auth") {
+    return res.status(401).json({ message: "unauthorized" + err.message });
+  } else if (err.type === "input") {
+    return res.status(400).json({ message: "bad request" });
+  } else return res.status(500).json({ message: "server error" + err.message });
 });
 export default app;
